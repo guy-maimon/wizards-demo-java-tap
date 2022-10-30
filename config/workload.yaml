@@ -12,6 +12,6 @@ spec:
       autoscaling.knative.dev/minScale: "1"
   source:
     git:
-      url: https://github.com/sample-accelerators/wizards-demo-java-tap
+      url: https://github.com/guy-maimon/wizards-demo-java-tap
       ref:
         branch: main
