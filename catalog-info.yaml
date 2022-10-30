@@ -16,3 +16,4 @@ spec:
   type: service
   lifecycle: experimental
   owner: default-team
+  system: tanzu-application-platform
