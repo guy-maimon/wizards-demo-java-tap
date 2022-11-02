@@ -1,15 +1,15 @@
-SOURCE_IMAGE = os.getenv("SOURCE_IMAGE", default='dev.local/target-project-source')
+SOURCE_IMAGE = os.getenv("SOURCE_IMAGE", default='dev.local/wizards-demo-java-tap-source')
 LOCAL_PATH = os.getenv("LOCAL_PATH", default='.')
 NAMESPACE = os.getenv("NAMESPACE", default='default')
 
 k8s_custom_deploy(
-    'target-project',
-    apply_cmd="tanzu apps workload apply -f config/workload.yaml --debug --live-update" +
-              " --local-path " + LOCAL_PATH +
-              " --source-image " + SOURCE_IMAGE +
-              " --namespace " + NAMESPACE +
-              " --yes >/dev/null" +
-              " && kubectl get workload target-project --namespace " + NAMESPACE + " -o yaml",
+    'wizards-demo-java-tap',
+    apply_cmd="tanzu apps workload apply -f config/workload.yaml --live-update" +
+               " --local-path " + LOCAL_PATH +
+               " --source-image " + SOURCE_IMAGE +
+               " --namespace " + NAMESPACE +
+               " --yes >/dev/null" +
+               " && kubectl get workload wizards-demo-java-tap --namespace " + NAMESPACE + " -o yaml",
     delete_cmd="tanzu apps workload delete -f config/workload.yaml --namespace " + NAMESPACE + " --yes",
     deps=['pom.xml', './target/classes'],
     container_selector='workload',
@@ -18,5 +18,5 @@ k8s_custom_deploy(
     ]
 )
 
-k8s_resource('target-project', port_forwards=["8080:8080"],
-            extra_pod_selectors=[{'serving.knative.dev/service': 'target-project'}])
+k8s_resource('wizards-demo-java-tap', port_forwards=["8080:8080"],
+            extra_pod_selectors=[{'serving.knative.dev/service': 'wizards-demo-java-tap'}])
